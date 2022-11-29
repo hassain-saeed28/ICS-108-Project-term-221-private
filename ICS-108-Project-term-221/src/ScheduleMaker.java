@@ -26,7 +26,7 @@ public class ScheduleMaker extends Application {
         Button button = new Button("start with a saved schedule");
         button.setPrefHeight(20);
         button.setPrefWidth(40);
-        button.setAlignment(Pos.CENTER);
+        
 
         Pane titelPane = new Pane();
         titelPane.getChildren().add(new Text(50, 27, "Add Sections to Basket"));
