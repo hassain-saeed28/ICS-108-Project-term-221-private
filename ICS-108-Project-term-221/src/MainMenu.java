@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -41,29 +43,42 @@ public class MainMenu extends Application {
         topRightButton.setPadding(new Insets(10, 10, 10, 10));
         topRightButton.setFont(Font.font(15));
         
-
-        
         hBoxTop.getChildren().addAll(titel,topRightButton);
 
 
-        // ListView listViewCourses = new ListView<>();
+        ListView<Object> listViewSectionsOfCourses = new ListView<>();
+
+        Button addButton = new Button("add");
+        Button removeButton = new Button("Remove");
+
+        // listViewSectionsOfCourses.getItems().add(0, removeButton);
+        // System.out.println(Section.sections);
+
+        ArrayList<Section> sectinosMenu = Section.sections;
+        System.out.println(sectinosMenu.get(0));
+        listViewSectionsOfCourses.getItems().addAll(addButton,removeButton);
+
+
 
         HBox hBoxBottom = new HBox();
+        hBoxBottom.setAlignment(Pos.BOTTOM_RIGHT);
+        hBoxBottom.setPadding(new Insets(15,15,15,15));
 
+        Button nextButton =  new Button("next");
+        nextButton.setPadding(new Insets(10, 10, 10, 10));
+        nextButton.setFont(Font.font(15));
 
+        hBoxBottom.getChildren().add(nextButton);
 
-    
 
         borderPane.setTop(hBoxTop);
         borderPane.setBottom(hBoxBottom);
-        // borderPane.setCenter(listViewCourses);
+        borderPane.setCenter(listViewSectionsOfCourses);
 
         Scene scene = new Scene(borderPane, 900, 700);   
         primaryStage.setTitle("ShowImage"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage\
         primaryStage.show();
-
-        
     }
 
     public static void main(String[] args) {

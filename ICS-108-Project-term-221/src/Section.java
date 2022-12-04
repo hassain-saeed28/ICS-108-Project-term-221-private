@@ -3,10 +3,12 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class Section {
 
     // the list of sectins in the course offering
-    static ArrayList<Section> sections = new ArrayList<>();
+    public static ArrayList<Section> sections = new ArrayList<>();
 
     private String course_sec;
     private String location;
@@ -55,7 +57,7 @@ public class Section {
         input.nextLine();
 
         // just for verifying the it works (the method below)
-        // int index = 0;
+        int index = 0;
 
         // here i will read each line and then split it by the "," dilamitr and then
         // store the components in an array then make a Section opject and then store it
@@ -71,8 +73,8 @@ public class Section {
 
             sections.add(new Section(Course, location, day_time));
 
-            // System.out.println(sections.get(index));
-            // index++;
+            System.out.println(sections.get(index));
+            index++;
         }
 
         input.close();
