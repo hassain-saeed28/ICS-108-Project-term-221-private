@@ -55,13 +55,18 @@ public class Course {
     public static void main(String[] args) throws FileNotFoundException {
 
         // opening the degree plan file and adding each course in the list of courses
-        File degreePlanFile = new File("Project/ICS-108-Project-term-221/ICS-108-Project-term-221/DegreePlan.csv");
+        File degreePlanFile = new File("ICS-108-Project-term-221/DegreePlan.csv");
         Scanner input = new Scanner(degreePlanFile);
-        input.useDelimiter(",");
-        // to skep the first row
+
+        // to skep the first row because is has the labels
         input.nextLine();
 
-        while (input.hasNext()) {
+        // just for verifying the it works (the method below)
+        // int index = 0;
+
+        // here i will read each line and then split it by the "," dilamitr and then
+        // store the components in an array then make a Cours opject and then store it in the arrayList courses
+            while (input.hasNext()) {
 
             String line = input.nextLine();
             String[] lineComponents = line.split(",");
@@ -72,6 +77,9 @@ public class Course {
             String corequisite = new String(lineComponents[3]);
 
             courses.add(new Course(courseName, creditHours, prerequisite, corequisite));
+
+            // System.out.println(courses.get(index));
+            // index++;
         }
         input.close();
     }
