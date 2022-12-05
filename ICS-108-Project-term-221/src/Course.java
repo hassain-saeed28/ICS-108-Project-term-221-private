@@ -7,6 +7,7 @@ public class Course {
 
     // the list of courses in the degree plan 
     static ArrayList<Course> courses = new ArrayList<>();
+    static ArrayList<String> coursesThatHavePrerequisites = new ArrayList<>();
 
     private String prerequisite;
     private String corequisite;
@@ -52,7 +53,7 @@ public class Course {
                 "\nthe corequisite is: " + this.corequisite;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static ArrayList<Course> getCourses() throws FileNotFoundException {
 
         // opening the degree plan file and adding each course in the list of courses
         File degreePlanFile = new File("ICS-108-Project-term-221/DegreePlan.csv");
@@ -82,5 +83,21 @@ public class Course {
             // index++;
         }
         input.close();
+        return courses;
     }
+
+    // public static ArrayList<String> getCoursesThatHavePrerequisites() {
+
+    //     for (int i = 0; i < courses.size(); i++) {
+
+    //         if (courses.get(i).getPrerequisite() != "None") {
+    //             coursesThatHavePrerequisites.add(courses.get(i).getPrerequisite());
+    //         }
+    //     }
+    //     System.out.println(coursesThatHavePrerequisites);
+    //     return coursesThatHavePrerequisites;
+
+    // }
+
+
 }

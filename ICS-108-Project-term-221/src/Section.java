@@ -9,9 +9,9 @@ import javafx.scene.control.Button;
 public class Section {
 
     // the list of sectins in the course offering
-    public static ObservableList<Section> sections = FXCollections.observableArrayList() ;
+    public static ObservableList<Section> sections = FXCollections.observableArrayList();
 
-    private String course;
+    private String courseName;
     private String sec;
     private String days;
     private String time;
@@ -19,34 +19,33 @@ public class Section {
     private Button addButton;
     private Button removeButton;
 
-
     public Section() {
 
     }
 
     public Section(
-            String course,
+            String courseName,
             String sec,
             String days,
             String time,
             String location) {
-        this.course = course;
+        this.courseName = courseName;
         this.sec = sec;
         this.days = days;
         this.time = time;
         this.location = location;
         this.addButton = new Button("add");
         this.removeButton = new Button("Remove");
-        removeButton.setOnAction(e->{
+        removeButton.setOnAction(e -> {
             System.out.println("it works too");
         });
-        addButton.setOnAction(e->{
+        addButton.setOnAction(e -> {
             System.out.println("it works");
         });
     }
 
-    public String getCourse() {
-        return course;
+    public String getCourseName() {
+        return courseName;
     }
 
     public String getSec() {
@@ -68,13 +67,14 @@ public class Section {
     public Button getAddButton() {
         return addButton;
     }
+
     public Button getRemoveButton() {
         return removeButton;
     }
 
     @Override
     public String toString() {
-        return "\ncourse: " + this.course +
+        return "\ncourse: " + this.courseName +
                 "section: " + this.sec +
                 "days: " + this.days +
                 "time: " + this.time +
@@ -82,7 +82,6 @@ public class Section {
     }
 
     public static ObservableList<Section> getSectionsObservableList() throws FileNotFoundException {
-
 
         // opening the course offiering file and adding each section in the list of
         // sections
@@ -100,14 +99,39 @@ public class Section {
             String line = input.nextLine();
             String[] lineComponents = line.split(",");
             String[] course_sec = lineComponents[0].split("-");
-            String course = new String(course_sec[0]);
+            String courseN = new String(course_sec[0]);
             String sec = new String(course_sec[1]);
             String days = new String(lineComponents[2]);
             String time = new String(lineComponents[3]);
             String location = new String(lineComponents[1]);
 
-            sections.add(new Section(course, sec, days, time, location));
+            // if ( ! (Student.getFinishedCourses().contains(courseN))) {
+                sections.add(new Section(courseN, sec, days, time, location));
+            // }
+            
         }
+
+        // for (int i = 0; i < sections.size(); i++) {
+        //     if (Student.getFinishedCourses().contains(sections.get(i).getCourseName())) {
+        //         sections.remove(i);
+        //     }
+        // }
+
+        // for (int section = 0; section < sections.size(); section++) {
+        // for (int courseInTheSection = 0; courseInTheSection < Course.courses.size();
+        // courseInTheSection++) {
+        // if (sections.get(section).getCourseName() ==
+        // Course.courses.get(courseInTheSection).getCourseName()) {
+        // if (Course.courses.get(courseInTheSection).getPrerequisite() != "None") {
+        // if (!(Student.getFinishedCourses()
+        // .contains(Course.courses.get(courseInTheSection).getPrerequisite()))) {
+        // sections.remove(section);
+        // }
+        // }
+        // }
+        // }
+
+        // }
         input.close();
         return sections;
 
