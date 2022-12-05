@@ -47,14 +47,11 @@ public class MainMenu extends Application {
         hBoxTop.getChildren().addAll(titel,topRightButton);
 
 
-        // ArrayList<Section> sectinosMenu = Section.sections;
-        // System.out.println(sectinosMenu.get(0));
-        // listViewSectionsOfCourses.getItems().addAll(addButton,removeButton);
         TableView<Section> tableView = new TableView<>();
 
         TableColumn<Section,String> courseColumn = new TableColumn<>("Course");
         // courseColumn.setMinWidth(200);
-        courseColumn.setCellValueFactory(new PropertyValueFactory<>("course"));
+        courseColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
 
         TableColumn<Section,String> secColumn = new TableColumn<>("Section");
         // secColumn.setMinWidth(200);
@@ -82,7 +79,17 @@ public class MainMenu extends Application {
 
 
         tableView.setItems(Section.getSectionsObservableList());
-        tableView.getColumns().addAll(courseColumn,secColumn,daysColumn,timeColumn,locationColumn,addBottonColumn,removeButtonColumn); 
+
+        tableView.getColumns().add(courseColumn);
+        tableView.getColumns().add(secColumn);
+        tableView.getColumns().add(daysColumn);
+        tableView.getColumns().add(timeColumn);
+        tableView.getColumns().add(locationColumn);
+        tableView.getColumns().add(addBottonColumn);
+        tableView.getColumns().add(removeButtonColumn);
+
+
+
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableView.setPadding(new Insets(0, 10, 0, 10));
         tableView.setBackground(Background.fill(Paint.valueOf("ffff")));

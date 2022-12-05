@@ -104,10 +104,10 @@ public class Section {
             String days = new String(lineComponents[2]);
             String time = new String(lineComponents[3]);
             String location = new String(lineComponents[1]);
-
-            // if ( ! (Student.getFinishedCourses().contains(courseN))) {
+            boolean found = (Student.getFinishedCourses().contains(courseN));
+            if ( ! found ) {
                 sections.add(new Section(courseN, sec, days, time, location));
-            // }
+            }
             
         }
 
