@@ -65,6 +65,8 @@ public class Course {
         // just for verifying the it works (the method below)
         // int index = 0;
 
+        String s = "";
+
         // here i will read each line and then split it by the "," dilamitr and then
         // store the components in an array then make a Cours opject and then store it in the arrayList courses
             while (input.hasNext()) {
@@ -76,14 +78,18 @@ public class Course {
             String creditHours = new String(lineComponents[1]);
             String prerequisite = new String(lineComponents[2]);
             String corequisite = new String(lineComponents[3]);
-
+            s = s+"\""+courseName +"\""+ ", ";
             courses.add(new Course(courseName, creditHours, prerequisite, corequisite));
 
             // System.out.println(courses.get(index));
             // index++;
         }
+        System.out.println(s);
         input.close();
         return courses;
+    }
+    public static void main(String[] args) throws FileNotFoundException {
+        getCourses();
     }
 
     // public static ArrayList<String> getCoursesThatHavePrerequisites() {

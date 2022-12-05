@@ -105,36 +105,31 @@ public class Section {
             String time = new String(lineComponents[3]);
             String location = new String(lineComponents[1]);
             boolean found = (Student.getFinishedCourses().contains(courseN));
-            if ( ! found ) {
+            if (!found) {
                 sections.add(new Section(courseN, sec, days, time, location));
             }
-            
         }
 
         // for (int i = 0; i < sections.size(); i++) {
-        //     if (Student.getFinishedCourses().contains(sections.get(i).getCourseName())) {
-        //         sections.remove(i);
-        //     }
-        // }
-
-        // for (int section = 0; section < sections.size(); section++) {
-        // for (int courseInTheSection = 0; courseInTheSection < Course.courses.size();
-        // courseInTheSection++) {
-        // if (sections.get(section).getCourseName() ==
-        // Course.courses.get(courseInTheSection).getCourseName()) {
-        // if (Course.courses.get(courseInTheSection).getPrerequisite() != "None") {
-        // if (!(Student.getFinishedCourses()
-        // .contains(Course.courses.get(courseInTheSection).getPrerequisite()))) {
-        // sections.remove(section);
-        // }
-        // }
+        // if (Student.getFinishedCourses().contains(sections.get(i).getCourseName())) {
+        // sections.remove(i);
         // }
         // }
 
-        // }
+        for (int section = 0; section < sections.size(); section++) {
+            for (int courseInTheSection = 0; courseInTheSection < Course.courses.size(); courseInTheSection++) {
+                if (sections.get(section).getCourseName() == Course.courses.get(courseInTheSection).getCourseName()) {
+                    if (Course.courses.get(courseInTheSection).getPrerequisite() != "None") {
+                        boolean condition = (Student.getFinishedCourses().contains(Course.courses.get(courseInTheSection).getPrerequisite()));
+                        if (!condition) {
+                            sections.remove(section);
+                        }
+                    }
+                }
+            }
+        }
         input.close();
         return sections;
-
     }
 
 }
