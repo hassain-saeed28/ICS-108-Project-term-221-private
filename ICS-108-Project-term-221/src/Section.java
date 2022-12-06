@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.collections.FXCollections;
@@ -83,9 +84,11 @@ public class Section {
 
     public static ObservableList<Section> getSectionsObservableList() throws FileNotFoundException {
 
+        ArrayList<Course> courses = Course.getCourses();
+
         // opening the course offiering file and adding each section in the list of
         // sections
-        File courseOfferingFile = new File("ICS-108-Project-term-221/CourseOffering.csv");
+        File courseOfferingFile = new File("ICS-108-Project-term-221/CourseOfferingNew.csv");
         Scanner input = new Scanner(courseOfferingFile);
 
         // to skep the first row because is has the labels
@@ -101,35 +104,37 @@ public class Section {
             String[] course_sec = lineComponents[0].split("-");
             String courseN = new String(course_sec[0]);
             String sec = new String(course_sec[1]);
-            String days = new String(lineComponents[2]);
-            String time = new String(lineComponents[3]);
-            String location = new String(lineComponents[1]);
-            boolean found = (Student.getFinishedCourses().contains(courseN));
-            if (!found) {
-                sections.add(new Section(courseN, sec, days, time, location));
-            }
-        }
+            String days = new String(lineComponents[1]);
+            String time = new String(lineComponents[2]);
+            String location = new String(lineComponents[3]);
 
-        // for (int i = 0; i < sections.size(); i++) {
-        // if (Student.getFinishedCourses().contains(sections.get(i).getCourseName())) {
-        // sections.remove(i);
-        // }
-        // }
+            int counter = 0;
+            int coursesSize = courses.size();
 
-        for (int section = 0; section < sections.size(); section++) {
-            for (int courseInTheSection = 0; courseInTheSection < Course.courses.size(); courseInTheSection++) {
-                if (sections.get(section).getCourseName() == Course.courses.get(courseInTheSection).getCourseName()) {
-                    if (Course.courses.get(courseInTheSection).getPrerequisite() != "None") {
-                        boolean condition = (Student.getFinishedCourses().contains(Course.courses.get(courseInTheSection).getPrerequisite()));
-                        if (!condition) {
-                            sections.remove(section);
+            while (counter < coursesSize) {
+                String courseNameFromCourses = courses.get(counter).getCourseName();
+                String courseNameFromSection = courseN;
+                boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
+
+                boolean found = (courseNameFromSection.equals(courseNameFromCourses));
+                if (found) {
+                    String Prerequisite = courses.get(counter).getPrerequisite();
+                    String Corequisite = courses.get(counter).getCorequisite();
+                    if (!Prerequisite.equals("None")) {
+                        boolean haveFinishedPrerequisite = Student.getFinishedCourses()
+                                .contains(courses.get(counter).getPrerequisite());
+                        if (haveFinishedPrerequisite) {
+                            sections.add(new Section(courseN, sec, days, time, location));
                         }
+                    } else if (Prerequisite.equals("None") & Corequisite.equals("None") & courseIsNotFinished) {
+                        sections.add(new Section(courseN, sec, days, time, location));
                     }
+                    counter++;
                 }
+
             }
         }
         input.close();
         return sections;
     }
-
 }

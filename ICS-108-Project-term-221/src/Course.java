@@ -84,7 +84,6 @@ public class Course {
             // System.out.println(courses.get(index));
             // index++;
         }
-        System.out.println(s);
         input.close();
         return courses;
     }
