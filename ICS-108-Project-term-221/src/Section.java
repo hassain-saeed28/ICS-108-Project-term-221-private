@@ -108,31 +108,37 @@ public class Section {
             String time = new String(lineComponents[2]);
             String location = new String(lineComponents[3]);
 
-            int counter = 0;
-            int coursesSize = courses.size();
 
-            while (counter < coursesSize) {
-                String courseNameFromCourses = courses.get(counter).getCourseName();
-                String courseNameFromSection = courseN;
-                boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
-
-                boolean found = (courseNameFromSection.equals(courseNameFromCourses));
-                if (found) {
-                    String Prerequisite = courses.get(counter).getPrerequisite();
-                    String Corequisite = courses.get(counter).getCorequisite();
-                    if (!Prerequisite.equals("None")) {
-                        boolean haveFinishedPrerequisite = Student.getFinishedCourses()
-                                .contains(courses.get(counter).getPrerequisite());
-                        if (haveFinishedPrerequisite) {
-                            sections.add(new Section(courseN, sec, days, time, location));
-                        }
-                    } else if (Prerequisite.equals("None") & Corequisite.equals("None") & courseIsNotFinished) {
-                        sections.add(new Section(courseN, sec, days, time, location));
-                    }
-                    counter++;
-                }
-
+            if (!(Student.getFinishedCourses().contains(courseN))) {
+                sections.add(new Section(courseN, sec, days, time, location));
             }
+
+            // int counter = 0;
+            // int coursesSize = courses.size();
+
+            // while (counter < coursesSize) {
+            //     String courseNameFromCourses = courses.get(counter).getCourseName();
+            //     String courseNameFromSection = courseN;
+            //     boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
+
+            //     boolean found = (courseNameFromSection.equals(courseNameFromCourses));
+            //     if (found) {
+            //         String Prerequisite = courses.get(counter).getPrerequisite();
+            //         String Corequisite = courses.get(counter).getCorequisite();
+            //         if (!Prerequisite.equals("None")) {
+            //             boolean haveFinishedPrerequisite = Student.getFinishedCourses()
+            //                     .contains(courses.get(counter).getPrerequisite());
+            //             if (haveFinishedPrerequisite) {
+            //                 sections.add(new Section(courseN, sec, days, time, location));
+            //             }
+            //         } 
+            //         else if (Prerequisite.equals("None") & Corequisite.equals("None") & courseIsNotFinished) {
+            //             sections.add(new Section(courseN, sec, days, time, location));
+            //         }
+            //         counter++;
+            //     }
+
+            // }
         }
         input.close();
         return sections;
