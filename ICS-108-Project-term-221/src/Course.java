@@ -7,6 +7,7 @@ public class Course {
 
     // the list of courses in the degree plan 
     static ArrayList<Course> courses = new ArrayList<>();
+    static ArrayList<String> coursesThatHavePrerequisites = new ArrayList<>();
 
     private String prerequisite;
     private String corequisite;
@@ -52,16 +53,23 @@ public class Course {
                 "\nthe corequisite is: " + this.corequisite;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static ArrayList<Course> getCourses() throws FileNotFoundException {
 
         // opening the degree plan file and adding each course in the list of courses
-        File degreePlanFile = new File("Project/ICS-108-Project-term-221/ICS-108-Project-term-221/DegreePlan.csv");
+        File degreePlanFile = new File("ICS-108-Project-term-221/DegreePlan.csv");
         Scanner input = new Scanner(degreePlanFile);
-        input.useDelimiter(",");
-        // to skep the first row
+
+        // to skep the first row because is has the labels
         input.nextLine();
 
-        while (input.hasNext()) {
+        // just for verifying the it works (the method below)
+        // int index = 0;
+
+        String s = "";
+
+        // here i will read each line and then split it by the "," dilamitr and then
+        // store the components in an array then make a Cours opject and then store it in the arrayList courses
+            while (input.hasNext()) {
 
             String line = input.nextLine();
             String[] lineComponents = line.split(",");
@@ -70,9 +78,31 @@ public class Course {
             String creditHours = new String(lineComponents[1]);
             String prerequisite = new String(lineComponents[2]);
             String corequisite = new String(lineComponents[3]);
-
+            s = s+"\""+courseName +"\""+ ", ";
             courses.add(new Course(courseName, creditHours, prerequisite, corequisite));
+
+            // System.out.println(courses.get(index));
+            // index++;
         }
         input.close();
+        return courses;
     }
+    public static void main(String[] args) throws FileNotFoundException {
+        getCourses();
+    }
+
+    // public static ArrayList<String> getCoursesThatHavePrerequisites() {
+
+    //     for (int i = 0; i < courses.size(); i++) {
+
+    //         if (courses.get(i).getPrerequisite() != "None") {
+    //             coursesThatHavePrerequisites.add(courses.get(i).getPrerequisite());
+    //         }
+    //     }
+    //     System.out.println(coursesThatHavePrerequisites);
+    //     return coursesThatHavePrerequisites;
+
+    // }
+
+
 }

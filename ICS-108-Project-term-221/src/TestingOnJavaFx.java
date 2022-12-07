@@ -15,7 +15,7 @@ import javafx.util.Duration;
 
 public class TestingOnJavaFx extends Application {
 
-  int randomImageIndex = (int) (Math.random() * 5);
+  int randomImageIndex = (int) (Math.random() * 4);
 
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
@@ -27,11 +27,11 @@ public class TestingOnJavaFx extends Application {
     hbox.setPadding(new Insets(50, 50, 50, 50));
 
     Image[] arrayOfImages = new Image[5];
-    arrayOfImages[0] = new Image("file:images/images1.jpeg");
-    arrayOfImages[1] = new Image("file:images/images2.jpeg");
-    arrayOfImages[2] = new Image("file:images/images3.jpeg");
-    arrayOfImages[3] = new Image("file:images/images4.jpeg");
-    arrayOfImages[4] = new Image("file:images/images5.jpeg");
+    arrayOfImages[0] = new Image("Image/221.png");
+    arrayOfImages[1] = new Image("Image/222.png");
+    arrayOfImages[2] = new Image("Image/open your mind.png");
+    arrayOfImages[3] = new Image("Image/Picture1.jpg");
+    
 
     // Image image = new Image(arrayOfImages[randomImageIndex]);
     ImageView imageView = new ImageView(arrayOfImages[randomImageIndex]);
