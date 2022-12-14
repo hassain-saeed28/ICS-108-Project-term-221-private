@@ -36,8 +36,8 @@ public class Student {
 
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        getFinishedCourses();
-    }
+    // public static void main(String[] args) throws FileNotFoundException {
+    //     System.out.println(getFinishedCourses());
+    // }
     
 }

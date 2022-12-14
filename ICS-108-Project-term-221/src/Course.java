@@ -9,8 +9,8 @@ public class Course {
     static ArrayList<Course> courses = new ArrayList<>();
     static ArrayList<String> coursesThatHavePrerequisites = new ArrayList<>();
 
-    private String prerequisite;
-    private String corequisite;
+    private ArrayList<String> prerequisite;
+    private ArrayList<String> corequisite;
     private String courseName;
     private String courseCredit;
 
@@ -21,19 +21,19 @@ public class Course {
     public Course(
             String courseName,
             String courseCredit,
-            String prerequisite,
-            String corequisite) {
+            ArrayList<String> prerequisite,
+            ArrayList<String> corequisite) {
         this.prerequisite = prerequisite;
         this.corequisite = corequisite;
         this.courseName = courseName;
         this.courseCredit = courseCredit;
     }
 
-    public String getCorequisite() {
+    public ArrayList<String> getCorequisite() {
         return corequisite;
     }
 
-    public String getPrerequisite() {
+    public ArrayList<String> getPrerequisite() {
         return prerequisite;
     }
 
@@ -47,7 +47,7 @@ public class Course {
 
     @Override
     public String toString() {
-        return "the course name is: " + this.courseName +
+        return "\nthe course name is: " + this.courseName +
                 "\nthe course credit is: " + this.courseCredit +
                 "\nthe prerequisite is: " + this.prerequisite +
                 "\nthe corequisite is: " + this.corequisite;
@@ -65,44 +65,36 @@ public class Course {
         // just for verifying the it works (the method below)
         // int index = 0;
 
-        String s = "";
 
         // here i will read each line and then split it by the "," dilamitr and then
         // store the components in an array then make a Cours opject and then store it in the arrayList courses
             while (input.hasNext()) {
-
             String line = input.nextLine();
             String[] lineComponents = line.split(",");
 
             String courseName = new String(lineComponents[0]);
             String creditHours = new String(lineComponents[1]);
-            String prerequisite = new String(lineComponents[2]);
-            String corequisite = new String(lineComponents[3]);
-            s = s+"\""+courseName +"\""+ ", ";
+            
+            String[] tempStringArrayToFillPrerequisiteArrayList = lineComponents[2].split(";");
+            ArrayList<String> prerequisite = new ArrayList<>();
+            for (int i = 0; i < tempStringArrayToFillPrerequisiteArrayList.length; i++) {
+                prerequisite.add(tempStringArrayToFillPrerequisiteArrayList[i]);
+            }
+
+            String[] tempStringArrayToFillCorequisiteArrayList = lineComponents[3].split(";");
+            ArrayList<String> corequisite = new ArrayList<>();
+            for (int i = 0; i < tempStringArrayToFillCorequisiteArrayList.length; i++) {
+                corequisite.add(tempStringArrayToFillCorequisiteArrayList[i]);
+            }
+
             courses.add(new Course(courseName, creditHours, prerequisite, corequisite));
 
-            // System.out.println(courses.get(index));
-            // index++;
         }
         input.close();
         return courses;
     }
+
     public static void main(String[] args) throws FileNotFoundException {
-        getCourses();
+        System.out.println(getCourses());
     }
-
-    // public static ArrayList<String> getCoursesThatHavePrerequisites() {
-
-    //     for (int i = 0; i < courses.size(); i++) {
-
-    //         if (courses.get(i).getPrerequisite() != "None") {
-    //             coursesThatHavePrerequisites.add(courses.get(i).getPrerequisite());
-    //         }
-    //     }
-    //     System.out.println(coursesThatHavePrerequisites);
-    //     return coursesThatHavePrerequisites;
-
-    // }
-
-
 }

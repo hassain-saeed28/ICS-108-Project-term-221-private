@@ -6,19 +6,20 @@ import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
+import javafx.scene.media.Track;
 
 public class Section {
 
     // the list of sectins in the course offering
     public static ObservableList<Section> sections = FXCollections.observableArrayList();
-
+    public static ArrayList<Section> basket = new ArrayList<>();
     private String courseName;
     private String sec;
     private String days;
     private String time;
     private String location;
-    private Button addButton;
-    private Button removeButton;
+    // private Button addButton;
+    // private Button removeButton;
 
     public Section() {
 
@@ -35,14 +36,9 @@ public class Section {
         this.days = days;
         this.time = time;
         this.location = location;
-        this.addButton = new Button("add");
-        this.removeButton = new Button("Remove");
-        removeButton.setOnAction(e -> {
-            System.out.println("it works too");
-        });
-        addButton.setOnAction(e -> {
-            System.out.println("it works");
-        });
+        // this.addButton = new Button("add");
+        // this.removeButton = new Button("Remove");
+
     }
 
     public String getCourseName() {
@@ -65,13 +61,13 @@ public class Section {
         return location;
     }
 
-    public Button getAddButton() {
-        return addButton;
-    }
+    // public Button getAddButton() {
+    //     return addButton;
+    // }
 
-    public Button getRemoveButton() {
-        return removeButton;
-    }
+    // public Button getRemoveButton() {
+    //     return removeButton;
+    // }
 
     @Override
     public String toString() {
@@ -108,39 +104,52 @@ public class Section {
             String time = new String(lineComponents[2]);
             String location = new String(lineComponents[3]);
 
-
-            if (!(Student.getFinishedCourses().contains(courseN))) {
-                sections.add(new Section(courseN, sec, days, time, location));
-            }
-
-            // int counter = 0;
-            // int coursesSize = courses.size();
-
-            // while (counter < coursesSize) {
-            //     String courseNameFromCourses = courses.get(counter).getCourseName();
-            //     String courseNameFromSection = courseN;
-            //     boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
-
-            //     boolean found = (courseNameFromSection.equals(courseNameFromCourses));
-            //     if (found) {
-            //         String Prerequisite = courses.get(counter).getPrerequisite();
-            //         String Corequisite = courses.get(counter).getCorequisite();
-            //         if (!Prerequisite.equals("None")) {
-            //             boolean haveFinishedPrerequisite = Student.getFinishedCourses()
-            //                     .contains(courses.get(counter).getPrerequisite());
-            //             if (haveFinishedPrerequisite) {
-            //                 sections.add(new Section(courseN, sec, days, time, location));
-            //             }
-            //         } 
-            //         else if (Prerequisite.equals("None") & Corequisite.equals("None") & courseIsNotFinished) {
-            //             sections.add(new Section(courseN, sec, days, time, location));
-            //         }
-            //         counter++;
-            //     }
-
+            // if (!(Student.getFinishedCourses().contains(courseN))) {
+            // sections.add(new Section(courseN, sec, days, time, location));
             // }
+
+            int counter = 0;
+            int coursesSize = courses.size();
+
+            while (counter < coursesSize) {
+                String courseNameFromCourses = courses.get(counter).getCourseName();
+                String courseNameFromSection = courseN;
+                boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
+                boolean prerequisiteIsNotNone = true;
+
+                boolean found = (courseNameFromSection.equals(courseNameFromCourses));
+                if (found) {
+                    ArrayList<String> Prerequisite = courses.get(counter).getPrerequisite();
+
+                    for (int i = 0; i < Prerequisite.size(); i++) {
+                        if (Prerequisite.get(i).equals("None")) {
+                            prerequisiteIsNotNone = false;
+                        }
+                    }
+
+                    if (prerequisiteIsNotNone) {
+                        boolean haveFinishedPrerequisite = Student.getFinishedCourses().containsAll(Prerequisite);
+                        if (haveFinishedPrerequisite) {
+                            sections.add(new Section(courseN, sec, days, time, location));
+                            counter = courses.size();
+                        }
+                    } else if ((!prerequisiteIsNotNone) & courseIsNotFinished) {
+                        sections.add(new Section(courseN, sec, days, time, location));
+                        counter = courses.size();
+                    }
+                }
+                counter++;
+            }
         }
+
+        // الكوندشن مضروب يضيف الكورسات الي قبل مثل ENGLS 102
+
+
         input.close();
         return sections;
     }
+
+    // public static void main(String[] args) throws FileNotFoundException {
+    //     System.out.println(getSectionsObservableList());
+    // }
 }
