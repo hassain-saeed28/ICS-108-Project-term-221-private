@@ -2,16 +2,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Handler;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
-
 public class Section {
-
-    public static int counterForAccessingButtons = 0;
 
     // the list of sectins in the course offering
     public static ObservableList<Section> sections = FXCollections.observableArrayList();
@@ -27,20 +22,6 @@ public class Section {
     public Section() {
 
     }
-
-    // public Section(Button addOrRemoveButten) {
-
-    //     if (addOrRemoveButten.getText().equals("add")) {
-
-
-
-    //     }
-
-    //     this.addButton = addOrRemoveButten;
-
-    // }
-
-
 
     public Section(
             String courseName,
@@ -107,8 +88,6 @@ public class Section {
         // to skep the first row because is has the labels
         input.nextLine();
 
-        // int counterForAccessingButtons = 0;
-
         // here i will read each line and then split it by the "," dilamitr and then
         // store the components in an array then make a Section opject and then store it
         // in the arrayList sectinos
@@ -123,7 +102,6 @@ public class Section {
             String time = new String(lineComponents[2]);
             String location = new String(lineComponents[3]);
 
-
             int counter = 0;
             int coursesSize = courses.size();
 
@@ -134,8 +112,7 @@ public class Section {
                 boolean prerequisiteIsNotNone = true;
                 boolean nameMatch = (courseNameFromSection.equals(courseNameFromCourses));
 
-
-                if (nameMatch & courseIsNotFinished ) {
+                if (nameMatch & courseIsNotFinished) {
                     ArrayList<String> Prerequisite = courses.get(counter).getPrerequisite();
 
                     for (int i = 0; i < Prerequisite.size(); i++) {
@@ -149,38 +126,30 @@ public class Section {
                         if (haveFinishedPrerequisite) {
                             sections.add(new Section(courseN, sec, days, time, location));
                             counter = courses.size();
-                            sections.get(sections.size() - 1).addButton.setId(sections.size() - 1 + "");                                   
+                            sections.get(sections.size() - 1).addButton.setId(sections.size() - 1 + "");
                         }
                     } else if ((!prerequisiteIsNotNone) & courseIsNotFinished) {
                         sections.add(new Section(courseN, sec, days, time, location));
                         counter = courses.size();
                         sections.get(sections.size() - 1).addButton.setId(sections.size() - 1 + "");
-                        
+
                     }
-                    // sections.get(sections.get(sections.size() - 1).addButton.getId()).addButton.setOnAction(e -> {
-                    //     MainMenu.basket.add(sections.get(sections.size() - 1));
-                    //     System.out.println("the section is been added ");
-                    //     System.out.println(MainMenu.basket);
-                    // });
+
                 }
                 counter++;
             }
         }
-        // الكوندشن مضروب يضيف الكورسات الي قبل مثل ENGLS 102
-        
-
-
         input.close();
         return sections;
     }
 
-    public static void handlAddAndRemoveButtens ( ) throws FileNotFoundException {
+    public static void handlAddAndRemoveButtens() throws FileNotFoundException {
 
         ObservableList<Section> sectionsList = getSectionsObservableList();
 
         for (int i = 0; i < sectionsList.size(); i++) {
 
-            int buttenId =  Integer.parseInt(sectionsList.get(i).addButton.getId());
+            int buttenId = Integer.parseInt(sectionsList.get(i).addButton.getId());
 
             sectionsList.get(i).addButton.setOnAction(e -> {
                 MainMenu.basket.add(sectionsList.get(buttenId));
@@ -196,14 +165,7 @@ public class Section {
                 sectionsList.get(buttenId).addButton.setVisible(true);
             });
 
-            
         }
 
     }
-
-
-
-    // public static void main(String[] args) throws FileNotFoundException {
-    //     System.out.println(getSectionsObservableList());
-    // }
 }

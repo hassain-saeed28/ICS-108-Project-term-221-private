@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Course {
 
-    // the list of courses in the degree plan 
+    // the list of courses in the degree plan
     static ArrayList<Course> courses = new ArrayList<>();
     static ArrayList<String> coursesThatHavePrerequisites = new ArrayList<>();
 
@@ -65,16 +65,16 @@ public class Course {
         // just for verifying the it works (the method below)
         // int index = 0;
 
-
         // here i will read each line and then split it by the "," dilamitr and then
-        // store the components in an array then make a Cours opject and then store it in the arrayList courses
-            while (input.hasNext()) {
+        // store the components in an array then make a Cours opject and then store it
+        // in the arrayList courses
+        while (input.hasNext()) {
             String line = input.nextLine();
             String[] lineComponents = line.split(",");
 
             String courseName = new String(lineComponents[0]);
             String creditHours = new String(lineComponents[1]);
-            
+
             String[] tempStringArrayToFillPrerequisiteArrayList = lineComponents[2].split(";");
             ArrayList<String> prerequisite = new ArrayList<>();
             for (int i = 0; i < tempStringArrayToFillPrerequisiteArrayList.length; i++) {
@@ -92,9 +92,5 @@ public class Course {
         }
         input.close();
         return courses;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        System.out.println(getCourses());
     }
 }
