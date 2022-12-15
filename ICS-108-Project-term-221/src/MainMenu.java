@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -17,6 +18,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainMenu extends Application {
+
+    public static ArrayList<Section> basket = new ArrayList<>();
 
     /* (non-Javadoc)
      * @see javafx.application.Application#start(javafx.stage.Stage)
@@ -69,13 +72,13 @@ public class MainMenu extends Application {
         // locationColumn.setMinWidth(200);
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
-        // TableColumn<Section,Button> addBottonColumn = new TableColumn<>("Adding botton");
-        // // addBottonColumn.setMinWidth(200);
-        // addBottonColumn.setCellValueFactory(new PropertyValueFactory<>("addButton"));
+        TableColumn<Section,Button> addBottonColumn = new TableColumn<>("Adding botton");
+        // addBottonColumn.setMinWidth(200);
+        addBottonColumn.setCellValueFactory(new PropertyValueFactory<>("addButton"));
 
-        // TableColumn<Section,Button> removeButtonColumn = new TableColumn<>("RemovebButton");
-        // // removeButtonColumn.setMinWidth(200);
-        // removeButtonColumn.setCellValueFactory(new PropertyValueFactory<>("removeButton"));
+        TableColumn<Section,Button> removeButtonColumn = new TableColumn<>("RemovebButton");
+        // removeButtonColumn.setMinWidth(200);
+        removeButtonColumn.setCellValueFactory(new PropertyValueFactory<>("removeButton"));
 
 
         tableView.setItems(Section.getSectionsObservableList());
@@ -85,14 +88,23 @@ public class MainMenu extends Application {
         tableView.getColumns().add(daysColumn);
         tableView.getColumns().add(timeColumn);
         tableView.getColumns().add(locationColumn);
-        // tableView.getColumns().add(addBottonColumn);
-        // tableView.getColumns().add(removeButtonColumn);
+        tableView.getColumns().add(addBottonColumn);
+        tableView.getColumns().add(removeButtonColumn);
 
 
 
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tableView.setPadding(new Insets(0, 10, 0, 10));
         tableView.setBackground(Background.fill(Paint.valueOf("ffff")));
+
+
+
+
+        // ListView<Button> buttonsListView = new ListView<>();
+
+        // for (int i = 0; i < Section.getSectionsObservableList().size(); i++) {
+        //     buttonsListView.getItems().add(new Button(i + 1 + ""));
+        // }
 
 
 
@@ -112,11 +124,15 @@ public class MainMenu extends Application {
         borderPane.setTop(hBoxTop);
         borderPane.setBottom(hBoxBottom);
         borderPane.setCenter(tableView);
+        // borderPane.setRight(buttonsListView);
 
+        Section.handlAddAndRemoveButtens();
         Scene scene = new Scene(borderPane, 900, 700);   
         primaryStage.setTitle("ShowImage"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage\
         primaryStage.show();
+        
+
     }
 
     public static void main(String[] args) {
