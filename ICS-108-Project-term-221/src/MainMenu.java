@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 public class MainMenu extends Application {
 
     public static ArrayList<Section> basket = new ArrayList<>();
-
+    Scene windo;
     /*
      * (non-Javadoc)
      * 
@@ -95,7 +95,10 @@ public class MainMenu extends Application {
         Button nextButton = new Button("next");
         nextButton.setPadding(new Insets(10, 10, 10, 10));
         nextButton.setFont(Font.font(15));
-      
+        nextButton.setOnAction(e ->{
+            primaryStage.setScene(courseOffering1.getScene());
+            primaryStage.show();
+        });
 
 
         hBoxBottom.getChildren().add(nextButton);

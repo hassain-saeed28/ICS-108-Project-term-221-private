@@ -62,8 +62,6 @@ public class Course {
         // to skep the first row because is has the labels
         input.nextLine();
 
-        // just for verifying the it works (the method below)
-        // int index = 0;
 
         // here i will read each line and then split it by the "," dilamitr and then
         // store the components in an array then make a Cours opject and then store it
