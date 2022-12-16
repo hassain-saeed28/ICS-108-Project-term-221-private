@@ -11,10 +11,10 @@ public class Student {
 
     }
 
-
     public static ArrayList<String> getFinishedCourses() throws FileNotFoundException {
 
-        // opening the finished courses file and adding each course in the list of finishedCourses
+        // opening the finished courses file and adding each course in the list of
+        // finishedCourses
         File finishedCoursesFile = new File("ICS-108-Project-term-221/FinishedCourses.csv");
         Scanner input = new Scanner(finishedCoursesFile);
 
@@ -36,8 +36,4 @@ public class Student {
 
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        getFinishedCourses();
-    }
-    
 }

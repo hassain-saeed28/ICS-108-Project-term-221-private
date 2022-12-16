@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
@@ -11,7 +10,7 @@ public class Section {
 
     // the list of sectins in the course offering
     public static ObservableList<Section> sections = FXCollections.observableArrayList();
-
+    public static ArrayList<Section> basket = new ArrayList<>();
     private String courseName;
     private String sec;
     private String days;
@@ -37,12 +36,7 @@ public class Section {
         this.location = location;
         this.addButton = new Button("add");
         this.removeButton = new Button("Remove");
-        removeButton.setOnAction(e -> {
-            System.out.println("it works too");
-        });
-        addButton.setOnAction(e -> {
-            System.out.println("it works");
-        });
+
     }
 
     public String getCourseName() {
@@ -76,9 +70,9 @@ public class Section {
     @Override
     public String toString() {
         return "\ncourse: " + this.courseName +
-                "section: " + this.sec +
-                "days: " + this.days +
-                "time: " + this.time +
+                "\nsection: " + this.sec +
+                "\ndays: " + this.days +
+                "\ntime: " + this.time +
                 "\nthe location is: " + this.location;
     }
 
@@ -108,39 +102,70 @@ public class Section {
             String time = new String(lineComponents[2]);
             String location = new String(lineComponents[3]);
 
+            int counter = 0;
+            int coursesSize = courses.size();
 
-            if (!(Student.getFinishedCourses().contains(courseN))) {
-                sections.add(new Section(courseN, sec, days, time, location));
+            while (counter < coursesSize) {
+                String courseNameFromCourses = courses.get(counter).getCourseName();
+                String courseNameFromSection = courseN;
+                boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
+                boolean prerequisiteIsNotNone = true;
+                boolean nameMatch = (courseNameFromSection.equals(courseNameFromCourses));
+
+                if (nameMatch & courseIsNotFinished) {
+                    ArrayList<String> Prerequisite = courses.get(counter).getPrerequisite();
+
+                    for (int i = 0; i < Prerequisite.size(); i++) {
+                        if (Prerequisite.get(i).equals("None")) {
+                            prerequisiteIsNotNone = false;
+                        }
+                    }
+
+                    if (prerequisiteIsNotNone) {
+                        boolean haveFinishedPrerequisite = Student.getFinishedCourses().containsAll(Prerequisite);
+                        if (haveFinishedPrerequisite) {
+                            sections.add(new Section(courseN, sec, days, time, location));
+                            counter = courses.size();
+                            sections.get(sections.size() - 1).addButton.setId(sections.size() - 1 + "");
+                        }
+                    } else if ((!prerequisiteIsNotNone) & courseIsNotFinished) {
+                        sections.add(new Section(courseN, sec, days, time, location));
+                        counter = courses.size();
+                        sections.get(sections.size() - 1).addButton.setId(sections.size() - 1 + "");
+
+                    }
+
+                }
+                counter++;
             }
-
-            // int counter = 0;
-            // int coursesSize = courses.size();
-
-            // while (counter < coursesSize) {
-            //     String courseNameFromCourses = courses.get(counter).getCourseName();
-            //     String courseNameFromSection = courseN;
-            //     boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
-
-            //     boolean found = (courseNameFromSection.equals(courseNameFromCourses));
-            //     if (found) {
-            //         String Prerequisite = courses.get(counter).getPrerequisite();
-            //         String Corequisite = courses.get(counter).getCorequisite();
-            //         if (!Prerequisite.equals("None")) {
-            //             boolean haveFinishedPrerequisite = Student.getFinishedCourses()
-            //                     .contains(courses.get(counter).getPrerequisite());
-            //             if (haveFinishedPrerequisite) {
-            //                 sections.add(new Section(courseN, sec, days, time, location));
-            //             }
-            //         } 
-            //         else if (Prerequisite.equals("None") & Corequisite.equals("None") & courseIsNotFinished) {
-            //             sections.add(new Section(courseN, sec, days, time, location));
-            //         }
-            //         counter++;
-            //     }
-
-            // }
         }
         input.close();
         return sections;
+    }
+
+    public static void handlAddAndRemoveButtens() throws FileNotFoundException {
+
+        ObservableList<Section> sectionsList = getSectionsObservableList();
+
+        for (int i = 0; i < sectionsList.size(); i++) {
+
+            int buttenId = Integer.parseInt(sectionsList.get(i).addButton.getId());
+
+            sectionsList.get(i).addButton.setOnAction(e -> {
+                MainMenu.basket.add(sectionsList.get(buttenId));
+                System.out.println("the section has been added");
+                System.out.println(MainMenu.basket);
+                sectionsList.get(buttenId).addButton.setVisible(false);
+            });
+
+            sectionsList.get(i).removeButton.setOnAction(e -> {
+                MainMenu.basket.remove(sectionsList.get(buttenId));
+                System.out.println("the section has been removed");
+                System.out.println(MainMenu.basket);
+                sectionsList.get(buttenId).addButton.setVisible(true);
+            });
+
+        }
+
     }
 }
