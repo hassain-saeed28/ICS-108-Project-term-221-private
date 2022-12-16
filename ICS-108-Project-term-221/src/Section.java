@@ -96,7 +96,7 @@ public class Section {
             String line = input.nextLine();
             String[] lineComponents = line.split(",");
             String[] course_sec = lineComponents[0].split("-");
-            String courseN = new String(course_sec[0]);
+            String courseName = new String(course_sec[0]);
             String sec = new String(course_sec[1]);
             String days = new String(lineComponents[1]);
             String time = new String(lineComponents[2]);
@@ -107,8 +107,8 @@ public class Section {
 
             while (counter < coursesSize) {
                 String courseNameFromCourses = courses.get(counter).getCourseName();
-                String courseNameFromSection = courseN;
-                boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseN));
+                String courseNameFromSection = courseName;
+                boolean courseIsNotFinished = !(Student.getFinishedCourses().contains(courseName));
                 boolean prerequisiteIsNotNone = true;
                 boolean nameMatch = (courseNameFromSection.equals(courseNameFromCourses));
 
@@ -124,12 +124,12 @@ public class Section {
                     if (prerequisiteIsNotNone) {
                         boolean haveFinishedPrerequisite = Student.getFinishedCourses().containsAll(Prerequisite);
                         if (haveFinishedPrerequisite) {
-                            sections.add(new Section(courseN, sec, days, time, location));
+                            sections.add(new Section(courseName, sec, days, time, location));
                             counter = courses.size();
                             sections.get(sections.size() - 1).addButton.setId(sections.size() - 1 + "");
                         }
                     } else if ((!prerequisiteIsNotNone) & courseIsNotFinished) {
-                        sections.add(new Section(courseN, sec, days, time, location));
+                        sections.add(new Section(courseName, sec, days, time, location));
                         counter = courses.size();
                         sections.get(sections.size() - 1).addButton.setId(sections.size() - 1 + "");
 

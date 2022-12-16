@@ -44,11 +44,11 @@ public class MainMenu extends Application {
         Text titel = new Text("Add Sections to Basket");
         titel.setFont(Font.font(30));
 
-        Button topRightButton = new Button("start with a saved schedule");
-        topRightButton.setPadding(new Insets(10, 10, 10, 10));
-        topRightButton.setFont(Font.font(15));
+        Button startSaveSchedule = new Button("start with a saved schedule");
+        startSaveSchedule.setPadding(new Insets(10, 10, 10, 10));
+        startSaveSchedule.setFont(Font.font(15));
 
-        hBoxTop.getChildren().addAll(titel, topRightButton);
+        hBoxTop.getChildren().addAll(titel, startSaveSchedule);
 
         TableView<Section> tableView = new TableView<>();
 
@@ -95,6 +95,8 @@ public class MainMenu extends Application {
         Button nextButton = new Button("next");
         nextButton.setPadding(new Insets(10, 10, 10, 10));
         nextButton.setFont(Font.font(15));
+      
+
 
         hBoxBottom.getChildren().add(nextButton);
 
