@@ -51,7 +51,7 @@ public class courseOffering1 extends Application {
 
         ListView<Section> listView = new ListView<> (FXCollections.observableArrayList(basket));
         listView.setPrefSize(400,700);
-        listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        // listView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         borderPane.setRight(new ScrollPane(listView));
 
         GridPane table = new GridPane();
