@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -108,6 +109,15 @@ public class MainMenu extends Application {
         primaryStage.setScene(scene); // Place the scene in the stage\
         primaryStage.show();
 
+        nextButton.setOnAction(e -> {
+            try {
+                primaryStage.setTitle("CourseOffering");
+                primaryStage.setScene(courseOffering1.getSecondScene());
+                primaryStage.show();
+            } catch (ClassNotFoundException | IOException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 
     public static void main(String[] args) {

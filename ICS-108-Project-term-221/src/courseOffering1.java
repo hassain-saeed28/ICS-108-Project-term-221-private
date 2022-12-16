@@ -1,5 +1,4 @@
 
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -8,14 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class courseOffering1 extends Application {
-    @Override
-    public void start(Stage stage) throws IOException,ClassNotFoundException {
+public class courseOffering1  {
+    
+    public static Scene getSecondScene() throws IOException,ClassNotFoundException {
         // create a border pane
         BorderPane borderPane= new BorderPane();
 
@@ -71,14 +69,14 @@ public class courseOffering1 extends Application {
 
 
         listView.getSelectionModel().selectedItemProperty().addListener(ov ->{
-            Section item= listView.getSelectionModel().getSelectedItem();
+            Section item = listView.getSelectionModel().getSelectedItem();
             int time = 0;
             int day;
             int row=1;
             int column=1;
             int columnExpand=0;
 
-            for(int i=0;i<basket.size() ;i++){
+            for(int i = 0;i<basket.size() ;i++){
                 String split;
                 String[] splitList;
                 int startTime=0;
@@ -246,13 +244,16 @@ public class courseOffering1 extends Application {
         GridPane.setHalignment(time[0], HPos.CENTER);GridPane.setHalignment(time[1], HPos.CENTER);GridPane.setHalignment(time[2], HPos.CENTER);GridPane.setHalignment(time[3], HPos.CENTER);GridPane.setHalignment(time[4], HPos.CENTER);GridPane.setHalignment(time[5], HPos.CENTER);GridPane.setHalignment(time[6], HPos.CENTER);GridPane.setHalignment(time[7], HPos.CENTER);GridPane.setHalignment(time[8], HPos.CENTER);GridPane.setHalignment(time[9], HPos.CENTER);GridPane.setHalignment(time[10], HPos.CENTER);GridPane.setHalignment(time[11], HPos.CENTER);GridPane.setHalignment(time[12], HPos.CENTER);GridPane.setHalignment(time[13], HPos.CENTER);
         table.setGridLinesVisible(false);
 
-        Scene scene= new Scene(borderPane,1000,790);
-        stage.setTitle("CourseOffering");
-        stage.setScene(scene);
-        stage.show();
+
+            
+
+
+        Scene scene = new Scene(borderPane,1000,790);
+        return scene;
+        
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
+    // public static void main(String[] args) {
+    //     launch(args);
+    // }
 }
