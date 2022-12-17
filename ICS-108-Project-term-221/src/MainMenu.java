@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,7 +21,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class MainMenu extends Application {
+public class MainMenu extends Application implements Serializable  {
 
     public static ArrayList<Section> basket = new ArrayList<>();
     Scene windo;
@@ -47,19 +48,27 @@ public class MainMenu extends Application {
         Text titel = new Text("Add Sections to Basket");
         titel.setFont(Font.font(30));
 
-        ObjectInputStream readSectionBinary = new ObjectInputStream(new FileInputStream("SectionForBinary.dat"));
 
         Button startSaveSchedule = new Button("start with a saved schedule");
         startSaveSchedule.setPadding(new Insets(10, 10, 10, 10));
         startSaveSchedule.setFont(Font.font(15));
         startSaveSchedule.setOnAction(e ->{
-            try{
-                Section section = (Section)readSectionBinary.readObject();
-                basket.add(section);
-                readSectionBinary.close();
-            }catch(Exception ex){
-                ex.getStackTrace();
-            }
+           try {
+            ObjectInputStream readBinarySection = new ObjectInputStream(new FileInputStream("D:/my file/java/Project/ICS-108-Project-term-221/ICS-108-Project-term-221/save_schedule.dat"));
+        
+            basket.add((Section)readBinarySection.readObject());
+            System.out.println("true");
+            readBinarySection.close();
+        } catch (FileNotFoundException e1) {
+            
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            
+            e1.printStackTrace();
+        } catch (ClassNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         });
 
 

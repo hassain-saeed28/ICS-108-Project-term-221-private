@@ -1,4 +1,3 @@
-
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -7,15 +6,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.TreeMap;
 
-public class courseOffering1 implements Serializable {
+public class courseOffering1 implements Serializable{
 
     public static Scene getSecondScene() throws IOException, ClassNotFoundException {
         // create a border pane
@@ -79,6 +81,8 @@ public class courseOffering1 implements Serializable {
         conflict.put("T", listOfTimeRangeOnT);
         conflict.put("W", listOfTimeRangeOnW);
         conflict.put("R", listOfTimeRangeOnR);
+        ArrayList<Section> sectionsInSaveSchedule = new ArrayList<>();
+
 
         lv.getSelectionModel().selectedItemProperty().addListener(ov -> {
             Section item = lv.getSelectionModel().getSelectedItem();
@@ -87,9 +91,7 @@ public class courseOffering1 implements Serializable {
             int row = 1;
             int column = 1;
             int columnExpand = 0;
-            ArrayList<String> sectionForBinary = new ArrayList<>();
-
-            String sec;
+            
             for (int i = 0; i < basket.size(); i++) {
 
                 // if((!sectionNumber.contains(basket.get(i)))){
@@ -214,7 +216,7 @@ public class courseOffering1 implements Serializable {
                     String day3Name = sectionName + "  ";
 
                     stackPane.getChildren().add(sectionName);
-
+                    
                     day3.getChildren().add(day3Label);
                     Button delete = new Button("Del");
                     delete.setOnAction(e -> {
@@ -222,6 +224,7 @@ public class courseOffering1 implements Serializable {
                         table.getChildren().remove(day2);
                         table.getChildren().remove(day3);
                         System.out.println(day3.getChildren().get(0).toString());
+                        
                     });
                     Button delete2 = new Button("Del");
                     delete2.setOnAction(e -> {
@@ -253,44 +256,49 @@ public class courseOffering1 implements Serializable {
                     day3.setBackground(Background.fill(Color.AQUA));
 
                     day = basket.get(i).getDays().length();
-                    sec = basket.get(i).getSec();
+                    
                     if (day == 3) {
                         table.add(stackPane, 1, time, 1, columnExpand);
                         table.add(day2, 3, time, 1, columnExpand);
                         table.add(day3, 5, time, 1, columnExpand);
-                        sectionForBinary.add(sec);
+                        sectionsInSaveSchedule.add(basket.get(i));
                     } else if (day == 2) {
                         if (basket.get(i).getDays().equals("UT")) {
                             table.add(stackPane, 1, time, 1, columnExpand);
                             table.add(day2, 3, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            sectionsInSaveSchedule.add(basket.get(i));
+
                         } else if (basket.get(i).getDays().equals("MW")) {
-                            table.add(stackPane, 3, time, 1, columnExpand);
-                            table.add(day2, 5, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            table.add(stackPane, 2, time, 1, columnExpand);
+                            table.add(day2, 4, time, 1, columnExpand);
+                            sectionsInSaveSchedule.add(basket.get(i));
+
                         } else {
                             table.add(stackPane, 3, time, 1, columnExpand);
                             table.add(day2, 5, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            sectionsInSaveSchedule.add(basket.get(i));
                         }
                     } else if (day == 1) {
                         if (basket.get(i).getDays().equals("U")){
                             table.add(stackPane, 1, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            sectionsInSaveSchedule.add(basket.get(i));
+
                         } 
                         else if (basket.get(i).getDays().equals("M")) {
                             table.add(stackPane, 2, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            sectionsInSaveSchedule.add(basket.get(i));
                         } else if (basket.get(i).getDays().equals("T")) {
                             table.add(stackPane, 3, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            sectionsInSaveSchedule.add(basket.get(i));
+
                         } else if (basket.get(i).getDays().equals("W")) {
                             table.add(stackPane, 4, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            sectionsInSaveSchedule.add(basket.get(i));
 
                         } else {
                             table.add(stackPane, 5, time, 1, columnExpand);
-                            sectionForBinary.add(sec);
+                            sectionsInSaveSchedule.add(basket.get(i));
+
                         }
                     }
                 }
@@ -300,15 +308,19 @@ public class courseOffering1 implements Serializable {
             }
 
         });
-        ObjectOutputStream writeSection = new ObjectOutputStream(new FileOutputStream("SectionForBinary.dat"));
+        
         save_schedule.setOnAction(e -> {
-            try {
-                writeSection.writeObject(sectionNumber);
-                writeSection.close();
+         
+            try (FileOutputStream write = new FileOutputStream("D:/my file/java/Project/ICS-108-Project-term-221/ICS-108-Project-term-221/save_schedule.dat")) {
+                ObjectOutputStream writeObject = new ObjectOutputStream(write);
+                writeObject.writeObject(sectionsInSaveSchedule);
+                writeObject.close();
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
+         
+           
        
         });
         borderPane.setLeft(table);
