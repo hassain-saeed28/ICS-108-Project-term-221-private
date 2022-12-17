@@ -1,12 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 
-public class Section {
+public class Section implements Serializable{
 
     // the list of sectins in the course offering
     public static ObservableList<Section> sections = FXCollections.observableArrayList();

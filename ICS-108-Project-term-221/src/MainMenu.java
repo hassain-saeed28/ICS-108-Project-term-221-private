@@ -1,6 +1,9 @@
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
-
+import java.io.Serializable;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +30,7 @@ public class MainMenu extends Application {
      * @see javafx.application.Application#start(javafx.stage.Stage)
      */
     @Override
-    public void start(Stage primaryStage) throws FileNotFoundException {
+    public void start(Stage primaryStage) throws IOException {
 
         // declaring the main page pane wich is a border pane
         BorderPane borderPane = new BorderPane();
@@ -44,9 +47,21 @@ public class MainMenu extends Application {
         Text titel = new Text("Add Sections to Basket");
         titel.setFont(Font.font(30));
 
+        ObjectInputStream readSectionBinary = new ObjectInputStream(new FileInputStream("SectionForBinary.dat"));
+
         Button startSaveSchedule = new Button("start with a saved schedule");
         startSaveSchedule.setPadding(new Insets(10, 10, 10, 10));
         startSaveSchedule.setFont(Font.font(15));
+        startSaveSchedule.setOnAction(e ->{
+            try{
+                Section section = (Section)readSectionBinary.readObject();
+                basket.add(section);
+                readSectionBinary.close();
+            }catch(Exception ex){
+                ex.getStackTrace();
+            }
+        });
+
 
         hBoxTop.getChildren().addAll(titel, startSaveSchedule);
 
@@ -95,10 +110,7 @@ public class MainMenu extends Application {
         Button nextButton = new Button("next");
         nextButton.setPadding(new Insets(10, 10, 10, 10));
         nextButton.setFont(Font.font(15));
-        nextButton.setOnAction(e ->{
-            primaryStage.setScene(courseOffering1.getScene());
-            primaryStage.show();
-        });
+       
 
 
         hBoxBottom.getChildren().add(nextButton);
@@ -113,6 +125,15 @@ public class MainMenu extends Application {
         primaryStage.setScene(scene); // Place the scene in the stage\
         primaryStage.show();
 
+        nextButton.setOnAction(e -> {
+            try {
+                primaryStage.setTitle("CourseOffering");
+                primaryStage.setScene(courseOffering1.getSecondScene());
+                primaryStage.show();
+            } catch (ClassNotFoundException | IOException e1) {
+                e1.printStackTrace();
+            }
+        });
     }
 
     public static void main(String[] args) {
