@@ -126,7 +126,7 @@ public class MainMenu extends Application implements Serializable {
         borderPane.setCenter(tableView);
 
         Section.handlAddAndRemoveButtens();
-        Scene scene = new Scene(borderPane, 900, 700);
+        Scene scene = new Scene(borderPane, 1600, 790);
         primaryStage.setTitle("ShowImage"); // Set the stage title
         primaryStage.setScene(scene); // Place the scene in the stage\
         primaryStage.show();

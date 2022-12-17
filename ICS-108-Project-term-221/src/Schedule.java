@@ -23,11 +23,11 @@ public class Schedule implements Serializable {
         HBox days = new HBox();
         days.setSpacing(50);
         days.setPadding(new Insets(10, 10, 10, 140));
-        Label days1 = new Label("sunday");
-        Label days2 = new Label("  monday");
-        Label days3 = new Label(" tuesday");
-        Label days4 = new Label("wednesday");
-        Label days5 = new Label("thursday");
+        Label days1 = new Label("                                                 sunday");
+        Label days2 = new Label("                                monday");
+        Label days3 = new Label("                                tuesday");
+        Label days4 = new Label("                          wednesday");
+        Label days5 = new Label("                             thursday");
         days.getChildren().addAll(days1, days2, days3, days4, days5);
 
         // adding the days to the top borderPne
@@ -49,7 +49,6 @@ public class Schedule implements Serializable {
         saveScheduleHbox.getChildren().add(saveSchedule);
         // setting the days in bottom borderPane
         borderPane.setBottom(saveScheduleHbox);
-        
 
         ListView<Section> lv = new ListView<>(FXCollections.observableArrayList(basket));
         lv.setPrefSize(400, 700);
@@ -131,8 +130,8 @@ public class Schedule implements Serializable {
                         int theLongestArray;
                         if ((timeConflict.get(day1) != null) && (timeConflict.get(day2) != null)) {
                             if ((timeConflict.get(day1).size() > 0) && (timeConflict.get(day2).size() > 0)) {
-            
-                                if(timeConflict.get(day1).size() >= timeConflict.get(day2).size()) {
+
+                                if (timeConflict.get(day1).size() >= timeConflict.get(day2).size()) {
                                     theLongestArray = timeConflict.get(day1).size();
                                 } else {
                                     theLongestArray = timeConflict.get(day2).size();
@@ -161,9 +160,9 @@ public class Schedule implements Serializable {
                         secondAndTimeDifference.add(endTime - startTime);
 
                         multiSectionConflict.put(basket.get(i).getCourseName(), secondAndTimeDifference);
-                        Label sectionName = new Label(item.getCourseName());
-                        Label day2Label = new Label(item.getCourseName());
-                        Label day3Label = new Label(item.getCourseName());
+                        Label sectionName = new Label(item.getCourseName()+" ,S: "+item.getSec()+" ,T: "+item.getTime());
+                        Label day2Label = new Label(item.getCourseName()+" ,S: "+item.getSec()+" ,T: "+item.getTime());
+                        Label day3Label = new Label(item.getCourseName()+" ,S: "+item.getSec()+" ,T: "+item.getTime());
                         sectionName.setPadding(new Insets(1, 1, 1, 1));
 
                         if (basket.get(i).getTime().equals("0700-0750"))
@@ -460,12 +459,12 @@ public class Schedule implements Serializable {
         ColumnConstraints column6 = new ColumnConstraints();
 
         table.getColumnConstraints().addAll(column1, column2, column3, column4, column5, column6);
-        column1.setPrefWidth(100);
-        column2.setPrefWidth(100);
-        column3.setPrefWidth(100);
-        column4.setPrefWidth(100);
-        column5.setPrefWidth(100);
-        column6.setPrefWidth(100);
+        column1.setPrefWidth(200);
+        column2.setPrefWidth(200);
+        column3.setPrefWidth(200);
+        column4.setPrefWidth(200);
+        column5.setPrefWidth(200);
+        column6.setPrefWidth(200);
 
         GridPane.setHalignment(time[0], HPos.CENTER);
         GridPane.setHalignment(time[1], HPos.CENTER);
@@ -483,7 +482,7 @@ public class Schedule implements Serializable {
         GridPane.setHalignment(time[13], HPos.CENTER);
         table.setGridLinesVisible(false);
 
-        Scene scene = new Scene(borderPane, 1000, 790);
+        Scene scene = new Scene(borderPane, 1600, 790);
         return scene;
 
     }
