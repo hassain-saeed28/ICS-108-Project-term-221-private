@@ -1,0 +1,42 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Course",
+            "request": "launch",
+            "mainClass": "Course",
+            "projectName": "ICS-108-Project-term-221_f074b8b9"
+        },
+        {
+            "type": "java",
+            "name": "Launch MainMenu",
+            "request": "launch",
+            "mainClass": "MainMenu",
+            "projectName": "ICS-108-Project-term-221_f074b8b9"
+        },
+        {
+            "type": "java",
+            "name": "Launch Student",
+            "request": "launch",
+            "mainClass": "Student",
+            "projectName": "ICS-108-Project-term-221_f074b8b9"
+        },
+        {
+            "type": "java",
+            "name": "Launch TestingOnJavaFx",
+            "request": "launch",
+            "mainClass": "TestingOnJavaFx",
+            "projectName": "ICS-108-Project-term-221_f074b8b9"
+        }
+    ]
+}

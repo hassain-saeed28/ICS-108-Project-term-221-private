@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
+<<<<<<< HEAD
         "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx.base.jar",
         "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx.controls.jar",
         "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx.fxml.jar",
@@ -8,7 +9,12 @@
         "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx.media.jar",
         "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx.swing.jar",
         "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx.web.jar",
+<<<<<<< HEAD
         "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx-swt.jar",
+=======
+        "d:\\my file\\java\\javafx-sdk-19\\lib\\javafx-swt.jar"
+=======
+>>>>>>> b5d7c15da43a0def516c60d238ebba603077f06b
         "c:\\Users\\h4980\\Downloads\\javafx-sdk-19\\openjfx-19_windows-x64_bin-sdk\\javafx-sdk-19\\lib\\javafx.base.jar",
         "c:\\Users\\h4980\\Downloads\\javafx-sdk-19\\openjfx-19_windows-x64_bin-sdk\\javafx-sdk-19\\lib\\javafx.controls.jar",
         "c:\\Users\\h4980\\Downloads\\javafx-sdk-19\\openjfx-19_windows-x64_bin-sdk\\javafx-sdk-19\\lib\\javafx.fxml.jar",
@@ -17,5 +23,9 @@
         "c:\\Users\\h4980\\Downloads\\javafx-sdk-19\\openjfx-19_windows-x64_bin-sdk\\javafx-sdk-19\\lib\\javafx.swing.jar",
         "c:\\Users\\h4980\\Downloads\\javafx-sdk-19\\openjfx-19_windows-x64_bin-sdk\\javafx-sdk-19\\lib\\javafx.web.jar",
         "c:\\Users\\h4980\\Downloads\\javafx-sdk-19\\openjfx-19_windows-x64_bin-sdk\\javafx-sdk-19\\lib\\javafx-swt.jar"
+<<<<<<< HEAD
+=======
+>>>>>>> 61315dd449f375ceaeeda13539c47d7e305b28f9
+>>>>>>> b5d7c15da43a0def516c60d238ebba603077f06b
     ]
 }
