@@ -65,18 +65,18 @@ public class courseOffering1 {
         W.clear();
         R.clear();
 
-        TreeMap<String, ArrayList<ArrayList<Integer>>> conflict = new TreeMap<>();
-        ArrayList<ArrayList<Integer>> listOfTimeRangeOnU = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> listOfTimeRangeOnM = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> listOfTimeRangeOnT = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> listOfTimeRangeOnW = new ArrayList<>();
-        ArrayList<ArrayList<Integer>> listOfTimeRangeOnR = new ArrayList<>();
+        // TreeMap<String, ArrayList<ArrayList<Integer>>> conflict = new TreeMap<>();
+        // ArrayList<ArrayList<Integer>> listOfTimeRangeOnU = new ArrayList<>();
+        // ArrayList<ArrayList<Integer>> listOfTimeRangeOnM = new ArrayList<>();
+        // ArrayList<ArrayList<Integer>> listOfTimeRangeOnT = new ArrayList<>();
+        // ArrayList<ArrayList<Integer>> listOfTimeRangeOnW = new ArrayList<>();
+        // ArrayList<ArrayList<Integer>> listOfTimeRangeOnR = new ArrayList<>();
 
-        conflict.put("U", listOfTimeRangeOnU);
-        conflict.put("M", listOfTimeRangeOnM);
-        conflict.put("T", listOfTimeRangeOnT);
-        conflict.put("W", listOfTimeRangeOnW);
-        conflict.put("R", listOfTimeRangeOnR);
+        // conflict.put("U", listOfTimeRangeOnU);
+        // conflict.put("M", listOfTimeRangeOnM);
+        // conflict.put("T", listOfTimeRangeOnT);
+        // conflict.put("W", listOfTimeRangeOnW);
+        // conflict.put("R", listOfTimeRangeOnR);
 
         lv.getSelectionModel().selectedItemProperty().addListener(ov -> {
             Section item = lv.getSelectionModel().getSelectedItem();
@@ -259,8 +259,8 @@ public class courseOffering1 {
                             table.add(stackPane, 1, time, 1, columnExpand);
                             table.add(day2, 3, time, 1, columnExpand);
                         } else if (basket.get(i).getDays().equals("MW")) {
-                            table.add(stackPane, 3, time, 1, columnExpand);
-                            table.add(day2, 5, time, 1, columnExpand);
+                            table.add(stackPane, 2, time, 1, columnExpand);
+                            table.add(day2, 4, time, 1, columnExpand);
                         } else {
                             table.add(stackPane, 3, time, 1, columnExpand);
                             table.add(day2, 5, time, 1, columnExpand);
